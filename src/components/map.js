@@ -1,15 +1,8 @@
-// src/components/map.js
-
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
 
-
-
-
-const Map = () => {
-  
+const MapComponent = () => {
   const center = [51.505, -0.09];
   const zoom = 13;
 
@@ -28,4 +21,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default MapComponent;
