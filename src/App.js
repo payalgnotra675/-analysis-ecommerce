@@ -1,9 +1,7 @@
 import React from 'react';
 import Chart from './components/Chart';
-import MapComponent from './components/map';
+import MapComponent from './components/Map';
 import 'leaflet/dist/leaflet.css';
-
-
 
 function App() {
   return (
