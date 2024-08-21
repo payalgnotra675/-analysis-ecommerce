@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-const CustomerSchema = new mongoose.Schema({
-  email: String,
-  created_at: Date,
+const customerSchema = new mongoose.Schema({
   default_address: {
-    city: String,
+    city: String
   },
+  created_at: {
+    type: Date,
+    default: Date.now
+  },
+  // Other fields as needed
 });
 
-module.exports = mongoose.model('Customer', CustomerSchema);
+module.exports = mongoose.model('Customer', customerSchema);
