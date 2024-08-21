@@ -1,51 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { 
-  Chart as ChartJS, 
-  CategoryScale, 
-  LinearScale, 
-  LineElement, 
-  Title, 
-  Tooltip, 
-  Legend, 
-  PointElement // Import PointElement 
-} from 'chart.js';
-
-// Registering required components in ChartJS
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  PointElement // Register PointElement
-);
+import 'chart.js/auto';
 
 const Chart = ({ title }) => {
-  const [data, setData] = useState({});
+    const [chartData, setChartData] = useState(null);
 
-  useEffect(() => {
-    // Mock data for testing purposes
-    const mockData = {
-      labels: ["January", "February", "March", "April", "May"],
-      values: [65, 59, 80, 81, 56]
-    };
+    useEffect(() => {
+        // Function to generate random data points
+        const generateRandomData = () => {
+            const labels = [];
+            const data = [];
 
-    setData({
-      labels: mockData.labels,
-      datasets: [
-        {
-          label: title,
-          data: mockData.values,
-          borderColor: 'rgba(75,192,192,1)',
-          backgroundColor: 'rgba(75,192,192,0.2)',
-        },
-      ],
-    });
-  }, [title]);
+            // Generate 6 random points
+            for (let i = 0; i < 6; i++) {
+                labels.push(i.toString());
+                data.push(Math.floor(Math.random() * 25)); // Random y value between 0 and 25
+            }
 
-  return data.labels ? <Line data={data} /> : <p>Loading chart data...</p>;
+            return { labels, data };
+        };
+
+        const randomData = generateRandomData();
+
+        const formattedData = {
+            labels: randomData.labels,
+            datasets: [
+                {
+                    label: title,
+                    data: randomData.data,
+                    fill: false,
+                    borderColor: 'rgba(75,192,192,1)',
+                    tension: 0.1,
+                },
+            ],
+        };
+
+        setChartData(formattedData);
+    }, [title]);
+
+    return (
+        <div>
+            {chartData ? <Line data={chartData} /> : <p>Loading chart...</p>}
+        </div>
+    );
 };
 
 export default Chart;
